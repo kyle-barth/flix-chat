@@ -13,7 +13,7 @@ class UsernameForm extends React.Component {
     }
 
     onChange(e) {
-        this.state({
+        this.setState({
             username: e.target.value,
         });
     }
@@ -24,13 +24,14 @@ class UsernameForm extends React.Component {
     }
 
     render() {
-        return 
+        return (
             <div>
                 <form onSubmit={this.onSubmit}>
                     <input type='text' placeholder='Username fam' onChange={this.onChange}/>
                     <input type='submit' />
                 </form>
             </div>
+        );
     }
 }
 

@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// ****
+
 app.post('/users', (req, res) => {
     const { username } = req.body
 
@@ -30,6 +32,13 @@ app.post('/users', (req, res) => {
         }
     });
 });
+
+app.post('/authenticate', (req, res) => {
+    const authData = chatKit.authenticate({ userId: req.query.user_id });
+    res.status(authData.status).send(authData.body);
+});
+
+// ****
 
 const PORT = process.env.PORT || 1337;
 

@@ -12,9 +12,11 @@ class ChatScreen extends React.Component {
             messages: [],
             currentRoom: {},
             currentUser: {},
+            usersWhoAreTyping: [],
         }
 
         this.sendMessage = this.sendMessage.bind(this);
+        this.sendTypingEvent = this.sendTypingEvent.bind(this);
     }
 
     componentDidMount() {
@@ -39,7 +41,21 @@ class ChatScreen extends React.Component {
                         this.setState({
                             messages: [...this.state.messages, message],
                         });
-                    }
+                    },
+                    onUserStartedTyping: user => {
+                       //console.log(user.name, 'started typing'); 
+                        this.setState({
+                            usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name]
+                        });
+                    },
+                    onUserStoppedTyping: user => {
+                        //console.log(user.name, 'stopped typing'); 
+                        this.setState({
+                            usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+                                username => username !== user.name
+                            ),
+                        });
+                    },
                 }
             }).then(currentRoom => {
                 // gives easier access to current room (and user) properties
@@ -58,13 +74,23 @@ class ChatScreen extends React.Component {
         });
     }
 
+    sendTypingEvent() {
+        // gets the state of the user to show if typing
+        this.state.currentUser.isTypingIn({
+            roomId: this.state.currentRoom.id
+        })
+        .catch(error => console.error('error', error));
+        // ^ just in case anything goes wrong
+    }
+
     render() {
         return (
             <div>
                 <h1>Chat</h1>
                 <p>'aight {this.props.currentUsername}</p>
                 <MessageList messages={this.state.messages} />
-                <SendMessageForm onSubmit={this.sendMessage} onChange={() => console.log('update')} />
+                <p>{JSON.stringify(this.state.usersWhoAreTyping)}</p>
+                <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />
             </div>
         );
     }

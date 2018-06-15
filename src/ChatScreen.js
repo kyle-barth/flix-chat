@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatKit from '@pusher/chatkit';
 import MessageList from './components/MessageList';
+import SendMessageForm from './components/SendMessageForm';
 
 class ChatScreen extends React.Component {
 
@@ -8,8 +9,12 @@ class ChatScreen extends React.Component {
         super();
 
         this.state = {
-            messages: []
+            messages: [],
+            currentRoom: {},
+            currentUser: {},
         }
+
+        this.sendMessage = this.sendMessage.bind(this);
     }
 
     componentDidMount() {
@@ -37,11 +42,19 @@ class ChatScreen extends React.Component {
                     }
                 }
             }).then(currentRoom => {
+                // gives easier access to current room (and user) properties
                 this.setState({ currentRoom });
             });
 
         }).catch(error => { 
             console.error(error);
+        });
+    }
+
+    sendMessage(text) {
+        this.state.currentUser.sendMessage({
+            roomId: this.state.currentRoom.id,
+            text,
         });
     }
 
@@ -51,6 +64,7 @@ class ChatScreen extends React.Component {
                 <h1>Chat</h1>
                 <p>'aight {this.props.currentUsername}</p>
                 <MessageList messages={this.state.messages} />
+                <SendMessageForm onSubmit={this.sendMessage} />
             </div>
         );
     }

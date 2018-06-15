@@ -2,6 +2,7 @@ import React from 'react';
 import ChatKit from '@pusher/chatkit';
 import MessageList from './components/MessageList';
 import SendMessageForm from './components/SendMessageForm';
+import TypingIndicator from './components/TypingIndicator';
 
 class ChatScreen extends React.Component {
 
@@ -89,7 +90,7 @@ class ChatScreen extends React.Component {
                 <h1>Chat</h1>
                 <p>'aight {this.props.currentUsername}</p>
                 <MessageList messages={this.state.messages} />
-                <p>{JSON.stringify(this.state.usersWhoAreTyping)}</p>
+                <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
                 <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />
             </div>
         );

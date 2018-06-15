@@ -21,10 +21,10 @@ class App extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username})
+            body: JSON.stringify({ username })
         })
         .then(res => {
-            console.log('success');
+            //console.log('success');
 
             this.setState({
                 currentUsername: username,
@@ -32,14 +32,15 @@ class App extends Component {
             });
         })
         .catch(error => {
-            console.error(error);
+            console.error('error', error);
         });
     }
 
     render() {
         if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
             return <UsernameForm onSubmit={this.onUsernameSubmitted} />
-        } else if (this.state.currentScreen === 'ChatScreen') {
+        }   
+        if (this.state.currentScreen === 'ChatScreen') {
             return <ChatScreen currentUsername={this.state.currentUsername} />
         }
     }

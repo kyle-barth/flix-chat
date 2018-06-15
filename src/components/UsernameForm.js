@@ -1,26 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class UsernameForm extends React.Component {
+class UsernameForm extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            username: ''
+            username: '',
         }
 
-        this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    onChange(e) {
-        this.setState({
-            username: e.target.value,
-        });
+        this.onChange = this.onChange.bind(this);
     }
 
     onSubmit(e) {
         e.preventDefault();
         this.props.onSubmit(this.state.username);
+    }
+
+    onChange(e) {
+        this.setState({ username: e.target.value });
     }
 
     render() {

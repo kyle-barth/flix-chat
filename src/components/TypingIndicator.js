@@ -1,9 +1,6 @@
 import React from 'react';
 
 class TypingIndicator extends React.Component {
-
-
-
     render() {
         if (this.props.usersWhoAreTyping.length === 0) {
             // return empty div
@@ -14,7 +11,6 @@ class TypingIndicator extends React.Component {
         } else if (this.props.usersWhoAreTyping.length > 1) {
             return <p>{this.props.usersWhoAreTyping.join(' and ')} are typing...</p>
         }
-
     }
 }
 

@@ -86,12 +86,19 @@ class ChatScreen extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Chat</h1>
-                <p>'aight {this.props.currentUsername}</p>
-                <MessageList messages={this.state.messages} />
-                <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
-                <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />
+            <div style={{ display: 'flex', height: '100vh', color: '#141414' }}> 
+                <div style={{ width: '30%', backgroundColor: '#E50914', }}>
+                    <h2>Currently online</h2>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column'}}>
+                    <h1>Chat</h1>
+                    <p>'aight {this.props.currentUsername}</p>
+                    <div style={{ flex: 1, }}>
+                        <MessageList messages={this.state.messages} />
+                    </div>
+                    <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
+                    <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />
+                </div>
             </div>
         );
     }

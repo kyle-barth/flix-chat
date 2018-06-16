@@ -35,9 +35,9 @@ Before submitting the pull request, consider the following:
 
 - Search for PR that relates to your submission - to avoid duplication.
 - Make changes in a new branch from `develop` 
-
+```
     git checkout -b feature/feature_name develop 
-
+```
 - Update relevant documentation if your PR changes major aspects of the software
 - Commit changes using a descriptive commit message that can be easily interpreted (no specific rules, just use your head)
 - Check if automated tests are passing and fix if necessary (not yet imlemented)

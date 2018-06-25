@@ -4,7 +4,7 @@ _Documentation to come.._
 
 To start the app:
 
-    git clone git@github.com:krynv/flix-chat.git
+    git clone https://github.com/kyle-barth/flix-chat.git
     npm i
     npm start
 
